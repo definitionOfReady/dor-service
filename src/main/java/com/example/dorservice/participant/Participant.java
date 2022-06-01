@@ -17,6 +17,7 @@ public class Participant {
     @Id
     private UUID id;
     private String name;
+    private String surname;
     @ManyToMany
     @Cascade(CascadeType.PERSIST)
     private List<Tag> tags;
@@ -59,5 +60,11 @@ public class Participant {
         this.tags = tags;
     }
 
+    public String getSurname() {
+        return surname;
+    }
 
+    public void setSurname(String surename) {
+        this.surname = surename;
+    }
 }
