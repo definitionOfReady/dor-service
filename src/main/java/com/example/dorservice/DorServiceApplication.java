@@ -12,14 +12,4 @@ public class DorServiceApplication {
 		SpringApplication.run(DorServiceApplication.class, args);
 	}
 
-
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("*").allowedOrigins("*");
-			}
-		};
-	}
-
 }

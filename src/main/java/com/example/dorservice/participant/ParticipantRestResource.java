@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("participants")
+@CrossOrigin(origins = "*")
 public class ParticipantRestResource {
 
 
