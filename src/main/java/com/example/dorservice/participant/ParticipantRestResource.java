@@ -7,20 +7,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Produces;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("participants")
 @CrossOrigin(origins = "*")
+@Produces("application/json")
 public class ParticipantRestResource {
 
 
-    @Autowired
-    HttpServletRequest httpServletRequest;
-
+    private final HttpServletRequest httpServletRequest;
     private final ParticipantRepository participantRepository;
 
-    public ParticipantRestResource(ParticipantRepository participantRepository) {
+    @Autowired
+    public ParticipantRestResource(HttpServletRequest httpServletRequest, ParticipantRepository participantRepository) {
+        this.httpServletRequest = httpServletRequest;
         this.participantRepository = participantRepository;
     }
 
