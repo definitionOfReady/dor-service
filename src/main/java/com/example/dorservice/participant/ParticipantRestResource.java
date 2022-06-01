@@ -6,12 +6,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("participants")
 public class ParticipantRestResource {
+
+    private final ParticipantRepository participantRepository;
+
+    public ParticipantRestResource(ParticipantRepository participantRepository) {
+        this.participantRepository = participantRepository;
+    }
 
     @PostMapping("")
     public Participant createParticipant(@RequestBody Participant participant) {
-        return new Participant(participant.getName());
+        var par = new Participant(participant.getName());
+        participantRepository.save(par);
+        return par;
     }
 
     @GetMapping("/{id}")
