@@ -20,7 +20,7 @@ public class TagRestResource {
 
     @GetMapping("")
     public TagResponseDTO getTags(@RequestParam String keywords) {
-        List<String> keywordlist = Arrays.stream(keywords.split(" ")).toList();
+        List<String> keywordlist = Arrays.stream(keywords.split(" ")).collect(Collectors.toList());
         var tags = tagRepository.findAll().stream().filter(tag -> keywordlist.stream().anyMatch(k -> tag.getName().contains(k))).collect(Collectors.toList());
         var tagResponse = new TagResponseDTO();
         tagResponse.setKeyword(keywords);
