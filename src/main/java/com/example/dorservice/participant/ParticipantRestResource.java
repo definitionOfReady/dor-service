@@ -17,9 +17,8 @@ public class ParticipantRestResource {
 
     @PostMapping("")
     public Participant createParticipant(@RequestBody Participant participant) {
-        var par = new Participant(participant.getName());
-        participantRepository.save(par);
-        return par;
+        participantRepository.save(participant);
+        return participant;
     }
 
     @GetMapping("/{id}")

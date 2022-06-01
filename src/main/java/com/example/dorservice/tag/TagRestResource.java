@@ -28,4 +28,10 @@ public class TagRestResource {
         return tagResponse;
     }
 
+    @PostMapping("")
+    public Tag createTag(@RequestBody Tag tag) {
+        tagRepository.save(tag);
+        return tag;
+    }
+
 }
