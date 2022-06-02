@@ -28,6 +28,8 @@ public class GroupActivity {
     @Cascade(CascadeType.PERSIST)
     private List<Tag> tags;
 
+    private String image;
+
     public GroupActivity() {
     }
 
@@ -104,6 +106,14 @@ public class GroupActivity {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
 

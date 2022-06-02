@@ -78,3 +78,36 @@ Content-Type: application/json
     ]
   }
 }
+
+### Trip get
+GET http://mytripfinder.ch/api/trip/4dfecd08-b91d-4002-b11a-ca8cf2f958f7
+Accept: application/json
+
+### Trip create
+POST http://mytripfinder.ch/api/trip
+Content-Type: application/json
+
+{
+  "trip": {
+    "id": "4dfecd08-b91d-4002-b11a-ca8cf2f958f7",
+    "name": "Example Activity",
+    "city": "Bern",
+    "tripStatus": "pending",
+    "date": "2022-06-02"
+  },
+  "initialParticipant": {
+    "id": "8036bc87-7ca8-4aa0-9c38-d6dffbc360e5",
+    "name": "Marcus",
+    "surname": "May",
+    "tags": [
+      {
+        "id": "c788f531-2e19-432f-8c95-b31e97cb2948",
+        "name": "active"
+      }
+    ]
+  }
+}
+
+### Participant delete Marcus
+DELETE http://mytripfinder.ch/api/trip/4dfecd08-b91d-4002-b11a-ca8cf2f958f7/participant/8036bc87-7ca8-4aa0-9c38-d6dffbc360e5
+Accept: application/json

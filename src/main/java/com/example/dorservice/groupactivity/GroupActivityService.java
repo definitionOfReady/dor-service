@@ -22,8 +22,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.toMap;
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.*;
 
 @Service
 public class GroupActivityService {
@@ -80,8 +79,7 @@ public class GroupActivityService {
         List<GroupActivity> activities = groupActivityRepository.getGroupActivitiesByModelIdIn(topResults.stream()
                                                                                                          .map(Map.Entry::getKey)
                                                                                                          .map(Integer::parseInt)
-                                                                                                         .collect(
-                                                                                                                 Collectors.toList()));
+                                                                                                         .collect(toList()));
         return activities.stream()
                          .map(a -> new PredictedActivityDto(a,
                                  entries.stream()
