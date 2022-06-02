@@ -1,5 +1,6 @@
 package com.example.dorservice.groupactivity;
 
+import com.example.dorservice.tag.Tag;
 import com.example.dorservice.trip.Trip;
 import com.example.dorservice.trip.TripRepository;
 import org.apache.logging.log4j.LogManager;
@@ -64,39 +65,40 @@ public class GroupActivityService {
         Map<String, Object> features = createFeatureMap(tripId);
 
         Map<String, Double> result = model.predict(features)
-                .entrySet()
-                .stream()
-                .collect(toMap(e -> e.getKey()
-                                .substring(0, e.getKey().length() - 1)
-                                .replace("probability(", ""),
-                        e -> (Double) e.getValue()));
+                                          .entrySet()
+                                          .stream()
+                                          .collect(toMap(e -> e.getKey()
+                                                               .substring(0, e.getKey().length() - 1)
+                                                               .replace("probability(", ""),
+                                                  e -> (Double) e.getValue()));
 
         LinkedList<Map.Entry<String, Double>> entries = new LinkedList<>(result.entrySet());
         entries.sort(new PredictionComparator());
         List<Map.Entry<String, Double>> topResults = entries.subList(0, 10);
 
 
-        List<GroupActivity> activities = groupActivityRepository.getGroupActivitiesByNameIn(topResults.stream()
-                .map(Map.Entry::getKey)
-                .collect(
-                        Collectors.toList()));
+        List<GroupActivity> activities = groupActivityRepository.getGroupActivitiesByModelIdIn(topResults.stream()
+                                                                                                         .map(Map.Entry::getKey)
+                                                                                                         .map(Integer::parseInt)
+                                                                                                         .collect(
+                                                                                                                 Collectors.toList()));
         return activities.stream()
-                .map(a -> new PredictedActivityDto(a,
-                        entries.stream()
-                                .filter(e -> e.getKey().equals(a.getName()))
-                                .map(Map.Entry::getValue)
-                                .findFirst()
-                                .orElseThrow()))
-                .sorted(new PredictedActivityDtoComparator())
-                .collect(Collectors.toCollection(LinkedList::new));
+                         .map(a -> new PredictedActivityDto(a,
+                                 entries.stream()
+                                        .filter(e -> e.getKey().equals(a.getModelId().toString()))
+                                        .map(Map.Entry::getValue)
+                                        .findFirst()
+                                        .orElseThrow()))
+                         .sorted(new PredictedActivityDtoComparator())
+                         .collect(Collectors.toCollection(LinkedList::new));
     }
 
     Map<String, Object> createFeatureMap(UUID tripId) {
         Trip trip = tripRepository.findById(tripId).get();
         Set<String> tags = trip.getParticipants().stream()
-                .flatMap(e -> e.getTags().stream())
-                .map(e -> e.getName())
-                .collect(toSet());
+                               .flatMap(t -> t.getTags().stream())
+                               .map(Tag::getName)
+                               .collect(toSet());
         return Arrays.stream(this.model.inputNames())
                 .collect(toMap(identity(), v -> tags.contains(v) ? 1 : 0));
     }

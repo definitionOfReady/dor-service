@@ -7,5 +7,5 @@ import java.util.UUID;
 
 public interface GroupActivityRepository extends JpaRepository<GroupActivity, UUID> {
 
-    List<GroupActivity> getGroupActivitiesByNameIn(List<String> names);
+    List<GroupActivity> getGroupActivitiesByModelIdIn(List<Integer> modelId);
 }
