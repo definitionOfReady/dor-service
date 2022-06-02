@@ -10,7 +10,6 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
@@ -36,7 +35,7 @@ public class GroupActivityService {
     }
 
     @PostConstruct
-    private void loadModel() throws URISyntaxException, IOException {
+    private void loadModel() throws IOException {
         logger.info("Import Model from xml. This may take a while...");
         try (InputStream is = this.getClass()
                                   .getClassLoader()
