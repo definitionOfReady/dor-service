@@ -21,7 +21,7 @@ public class Tag {
 
     @PrePersist
     private void prePersist() {
-        if(id==null) {
+        if (id == null) {
             this.id = UUID.randomUUID();
         }
     }
@@ -40,5 +40,13 @@ public class Tag {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

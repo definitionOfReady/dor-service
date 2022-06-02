@@ -1,7 +1,7 @@
-INSERT INTO Tag(ID, NAME) VALUES ('5e5a37cb-7fb6-40f2-acc5-de9f8fa1aaea', 'active');
-INSERT INTO Tag(ID, NAME) VALUES ('5e5a37cb-7fb6-40f2-acc5-de9f8fa1aaeb', 'calm');
-INSERT INTO Tag(ID, NAME) VALUES ('5e5a37cb-7fb6-40f2-acc5-de9f8fa1aaec', 'cheap');
-INSERT INTO Tag(ID, NAME) VALUES ('5e5a37cb-7fb6-40f2-acc5-de9f8fa1aaed', 'expensive');
-INSERT INTO Tag(ID, NAME) VALUES ('5e5a37cb-7fb6-40f2-acc5-de9f8fa1aaee', 'nearby');
+INSERT INTO Tag(ID, NAME) VALUES ('c788f531-2e19-432f-8c95-b31e97cb2948', 'active');
+INSERT INTO Tag(ID, NAME) VALUES ('56037d48-1cc1-4963-aeb0-0910f91cc7f1', 'calm');
+INSERT INTO Tag(ID, NAME) VALUES ('02dd26fe-e949-4c8d-9cf4-847fd6d609e6', 'cheap');
+INSERT INTO Tag(ID, NAME) VALUES ('6b3fad71-aa72-4b35-b69d-4c78ad06a54f', 'expensive');
+INSERT INTO Tag(ID, NAME) VALUES ('3e85edb8-e196-4288-9fa0-d7d0f448afeb', 'nearby');
 
 COMMIT;

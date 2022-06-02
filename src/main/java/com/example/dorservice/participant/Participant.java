@@ -22,20 +22,6 @@ public class Participant {
     @Cascade(CascadeType.PERSIST)
     private List<Tag> tags;
 
-    public Participant(String name) {
-        this.name = name;
-    }
-
-    public Participant() {
-    }
-
-    @PrePersist
-    private void prePersist() {
-        if(id==null) {
-            this.id = UUID.randomUUID();
-        }
-    }
-
     public String getName() {
         return name;
     }
@@ -66,5 +52,15 @@ public class Participant {
 
     public void setSurname(String surename) {
         this.surname = surename;
+    }
+
+    @Override
+    public String toString() {
+        return "Participant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", tags=" + tags +
+                '}';
     }
 }
