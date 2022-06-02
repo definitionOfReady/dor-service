@@ -35,5 +35,12 @@ public class ParticipantRestResource {
         return participantRepository.findById(id).get();
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteParticipant(@PathVariable UUID tid, @PathVariable UUID id) {
+        Trip trip = tripRepository.findById(tid).get();
+        trip.getParticipants().removeIf(e -> e.getId().equals(id));
+        tripRepository.save(trip);
+        participantRepository.deleteById(id);
+    }
 
 }
