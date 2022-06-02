@@ -2,7 +2,6 @@ package com.example.dorservice.tag;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
 import java.util.UUID;
 
 @Entity
@@ -11,20 +10,7 @@ public class Tag {
     @Id
     private UUID id;
     private String name;
-
-    public Tag(String name) {
-        this.name = name;
-    }
-
-    public Tag() {
-    }
-
-    @PrePersist
-    private void prePersist() {
-        if (id == null) {
-            this.id = UUID.randomUUID();
-        }
-    }
+    private boolean preferred;
 
     public UUID getId() {
         return id;
@@ -42,11 +28,20 @@ public class Tag {
         this.name = name;
     }
 
+    public boolean isPreferred() {
+        return preferred;
+    }
+
+    public void setPreferred(boolean preferred) {
+        this.preferred = preferred;
+    }
+
     @Override
     public String toString() {
         return "Tag{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", preferred=" + preferred +
                 '}';
     }
 }

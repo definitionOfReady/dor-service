@@ -17,7 +17,17 @@ Content-Type: application/json
 {
   "id": "2c650ee0-b232-48fc-9751-91fb0080dccf",
   "name": "Marius",
-  "surname": "Stalder"
+  "surname": "Stalder",
+  "tags": [
+    {
+      "id": "c788f531-2e19-432f-8c95-b31e97cb2948",
+      "name": "active"
+    },
+    {
+      "id": "56037d48-1cc1-4963-aeb0-0910f91cc7f1",
+      "name": "calm"
+    }
+  ]
 }
 
 ### Participant get Marius

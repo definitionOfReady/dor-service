@@ -25,7 +25,6 @@ public class TagRestResource {
         return tagRepository.findAll();
     }
 
-
     @GetMapping("/filter")
     public TagResponseDTO getFilteredTags(@RequestParam String keywords) {
         List<String> keywordlist = Arrays.stream(keywords.split(" ")).collect(Collectors.toList());
