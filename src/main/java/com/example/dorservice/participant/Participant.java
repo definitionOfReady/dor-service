@@ -7,7 +7,7 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.PrePersist;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public class Participant {
     private String surname;
     @ManyToMany
     @Cascade(CascadeType.PERSIST)
-    private List<Tag> tags;
+    private List<Tag> tags = new ArrayList<>();
 
     public String getName() {
         return name;
