@@ -1,1 +1,2 @@
 .pmml filter=lfs diff=lfs merge=lfs -text
+*.cpgz filter=lfs diff=lfs merge=lfs -text

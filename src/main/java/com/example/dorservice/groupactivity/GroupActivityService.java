@@ -8,10 +8,14 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 @Service
 public class GroupActivityService {
@@ -30,15 +34,18 @@ public class GroupActivityService {
     }
 
     @PostConstruct
-    private void loadModel() {
+    private void loadModel() throws URISyntaxException, IOException {
         logger.info("Import Model from xml. This may take a while...");
         URL url = this.getClass()
                       .getClassLoader()
-                      .getResource("model/" + modelName);
+                      .getResource("model/" + modelName + ".zip");
 
         if (url != null) {
-            File modelFile = new File(url.getFile());
-            this.model = Model.fromFile(modelFile);
+            File zipFile = new File(url.toURI());
+            try (ZipFile file = new ZipFile(zipFile)) {
+                ZipEntry entry = file.getEntry(modelName);
+                this.model = Model.fromInputStream(file.getInputStream(entry));
+            }
         }
     }
 
