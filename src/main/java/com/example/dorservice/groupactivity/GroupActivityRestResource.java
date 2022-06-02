@@ -1,8 +1,5 @@
 package com.example.dorservice.groupactivity;
 
-import com.example.dorservice.participant.Participant;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +22,9 @@ public class GroupActivityRestResource {
         this.groupActivityRepository = groupActivityRepository;
     }
 
-    @GetMapping("predict")
-    public List<String> createPredictActivity(@RequestBody PredictActivityDto predictActivityDto) {
-        return groupActivityService.predictGroupActivity(predictActivityDto);
+    @PostMapping("/{id}/predict")
+    public List<PredictedActivityDto> createPredictActivity(@PathVariable UUID id) {
+        return groupActivityService.predictGroupActivity(id);
     }
 
 
