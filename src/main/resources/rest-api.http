@@ -1,3 +1,7 @@
+POST http://localhost:8080/groupActivity/4dfecd08-b91d-4002-b11a-ca8cf2f958f7/predict
+Accept: application/json
+
+###
 ### Tag get filtered
 GET http://localhost:8080/tags/filter?keywords=n
 Accept: application/json
@@ -20,12 +24,12 @@ Content-Type: application/json
   "surname": "Stalder",
   "tags": [
     {
-      "id": "c788f531-2e19-432f-8c95-b31e97cb2948",
-      "name": "active"
+      "id": "ccff82da-d889-4b00-807b-cd61a0732aea",
+      "name": "Sommer"
     },
     {
-      "id": "56037d48-1cc1-4963-aeb0-0910f91cc7f1",
-      "name": "calm"
+      "id": "e8ca6957-5fa3-4e0e-94c8-9c5c8c08650c",
+      "name": "Graubünden"
     }
   ]
 }
@@ -60,10 +64,11 @@ Content-Type: application/json
     "surname": "May",
     "tags": [
       {
-        "id": "c788f531-2e19-432f-8c95-b31e97cb2948",
-        "name": "active"
+        "id": "ccff82da-d889-4b00-807b-cd61a0732aea",
+        "name": "Sommer"
       }
     ]
   }
 }
+
 
