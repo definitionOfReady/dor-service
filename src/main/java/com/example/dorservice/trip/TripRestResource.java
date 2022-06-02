@@ -25,7 +25,7 @@ public class TripRestResource {
 
     @PostMapping
     public Trip create(@RequestBody CreateTripRequestDTO req) {
-        LOGGER.info("create req={}", req);
+//        LOGGER.info("create req={}", req);
         Participant participant = participantRepository.save(req.getInitialParticipant());
         req.getTrip().getParticipants().add(participant);
         return tripRepository.save(req.getTrip());
