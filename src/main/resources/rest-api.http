@@ -1,7 +1,15 @@
-POST http://localhost:8080/groupActivity/4dfecd08-b91d-4002-b11a-ca8cf2f958f7/predict
-Accept: application/json
+### Trip select group activity
+PUT http://localhost:8080/trip/4dfecd08-b91d-4002-b11a-ca8cf2f958f7/select/3c6134e1-af1b-416a-a7b1-f82a86fa6dde
+Content-Type: application/json
 
-###
+{}
+
+### Trip predict
+PUT http://localhost:8080/trip/4dfecd08-b91d-4002-b11a-ca8cf2f958f7/predict
+Content-Type: application/json
+
+{}
+
 ### Tag get filtered
 GET http://localhost:8080/tags/filter?keywords=n
 Accept: application/json
@@ -70,5 +78,3 @@ Content-Type: application/json
     ]
   }
 }
-
-

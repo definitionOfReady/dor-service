@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -12,19 +11,10 @@ import java.util.UUID;
 @CrossOrigin(origins = "*")
 public class GroupActivityRestResource {
 
-    private final GroupActivityService groupActivityService;
-
     private final GroupActivityRepository groupActivityRepository;
 
-    public GroupActivityRestResource(GroupActivityService groupActivityService,
-                                     GroupActivityRepository groupActivityRepository) {
-        this.groupActivityService = groupActivityService;
+    public GroupActivityRestResource(GroupActivityRepository groupActivityRepository) {
         this.groupActivityRepository = groupActivityRepository;
-    }
-
-    @PostMapping("/{id}/predict")
-    public List<PredictedActivityDto> createPredictActivity(@PathVariable UUID id) {
-        return groupActivityService.predictGroupActivity(id);
     }
 
 
