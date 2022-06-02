@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
@@ -39,17 +40,22 @@ public class GroupActivityService {
     TripRepository tripRepository;
 
     @PostConstruct
-    private void loadModel() throws URISyntaxException, IOException {
+    private void loadModel() throws IOException {
         logger.info("Import Model from xml. This may take a while...");
-        URL url = this.getClass()
-                .getClassLoader()
-                .getResource("model/" + modelName + ".zip");
+        try (InputStream is = this.getClass()
+                                  .getClassLoader()
+                                  .getResourceAsStream("model/" + modelName + ".zip")) {
+            if (is != null) {
+                File targetFile = new File("tempModel.zip");
+                Files.copy(
+                        is,
+                        targetFile.toPath(),
+                        StandardCopyOption.REPLACE_EXISTING);
 
-        if (url != null) {
-            File zipFile = new File(url.toURI());
-            try (ZipFile file = new ZipFile(zipFile)) {
-                ZipEntry entry = file.getEntry(modelName);
-                this.model = Model.fromInputStream(file.getInputStream(entry));
+                try (ZipFile file = new ZipFile(targetFile)) {
+                    ZipEntry entry = file.getEntry(modelName);
+                    this.model = Model.fromInputStream(file.getInputStream(entry));
+                }
             }
         }
     }
@@ -94,7 +100,7 @@ public class GroupActivityService {
         return Arrays.stream(this.model.inputNames())
                 .collect(toMap(identity(), v -> tags.contains(v) ? 1 : 0));
     }
-    
+
     private static class PredictionComparator implements Comparator<Map.Entry<String, Double>> {
 
         @Override
