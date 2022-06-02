@@ -7,28 +7,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.pmml4s.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.*;
 
 @Service
 public class GroupActivityService {
-
-    @Value("${com.example.dorservice.groupActivity.classifier.model}")
-    private String modelName;
 
     Model model;
 
@@ -38,26 +27,12 @@ public class GroupActivityService {
     GroupActivityRepository groupActivityRepository;
     @Autowired
     TripRepository tripRepository;
+    @Autowired
+    ModelService modelService;
 
     @PostConstruct
-    private void loadModel() throws IOException {
-        logger.info("Import Model from xml. This may take a while...");
-        try (InputStream is = this.getClass()
-                                  .getClassLoader()
-                                  .getResourceAsStream("model/" + modelName + ".zip")) {
-            if (is != null) {
-                File targetFile = new File("tempModel.zip");
-                Files.copy(
-                        is,
-                        targetFile.toPath(),
-                        StandardCopyOption.REPLACE_EXISTING);
-
-                try (ZipFile file = new ZipFile(targetFile)) {
-                    ZipEntry entry = file.getEntry(modelName);
-                    this.model = Model.fromInputStream(file.getInputStream(entry));
-                }
-            }
-        }
+    private void init() {
+        modelService.load(e -> this.model = e);
     }
 
     public List<PredictedActivityDto> predictGroupActivity(UUID tripId) {
