@@ -1,7 +1,26 @@
+### Participant create Marius
+POST http://localhost:8080/participants
+Content-Type: application/json
+
+{
+  "id": "2c650ee0-b232-48fc-9751-91fb0080dccf",
+  "name": "Marius",
+  "surname": "Stalder"
+}
+
+### Participant get Marius
+GET http://localhost:8080/participants/2c650ee0-b232-48fc-9751-91fb0080dccf
+Accept: application/json
+
+### Participant get Marcus
+GET http://localhost:8080/participants/8036bc87-7ca8-4aa0-9c38-d6dffbc360e5
+Accept: application/json
+
+### Trip get
 GET http://localhost:8080/trip/4dfecd08-b91d-4002-b11a-ca8cf2f958f7
 Accept: application/json
 
-###
+### Trip create
 POST http://localhost:8080/trip
 Content-Type: application/json
 
