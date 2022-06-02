@@ -28,6 +28,7 @@ public class GroupActivity {
     @Cascade(CascadeType.PERSIST)
     private List<Tag> tags;
 
+    @Column(columnDefinition = "TEXT")
     private String image;
 
     public GroupActivity() {
