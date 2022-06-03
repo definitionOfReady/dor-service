@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableAsync
+//@EnableAsync
 public class FlywayConfiguration {
 
     @Autowired
@@ -16,3 +16,4 @@ public class FlywayConfiguration {
         Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();
     }
 }
+
