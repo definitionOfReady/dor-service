@@ -32,7 +32,7 @@ public class GroupActivityService {
 
     @PostConstruct
     private void init() {
-//        modelService.load(e -> this.model = e);
+        modelService.load(e -> this.model = e);
     }
 
     public List<PredictedActivityDto> predictGroupActivity(UUID tripId) {
