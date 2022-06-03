@@ -31,15 +31,16 @@ public class ModelService {
                 .getClassLoader()
                 .getResourceAsStream("model/" + modelName + ".zip")) {
             if (is != null) {
-                File targetFile = new File("tempModel.zip");
+                File tempFile = new File("tempModel.zip");
                 Files.copy(
                         is,
-                        targetFile.toPath(),
+                        tempFile.toPath(),
                         StandardCopyOption.REPLACE_EXISTING);
 
-                try (ZipFile file = new ZipFile(targetFile)) {
+                try (ZipFile file = new ZipFile(tempFile)) {
                     ZipEntry entry = file.getEntry(modelName);
                     Model model = Model.fromInputStream(file.getInputStream(entry));
+                    tempFile.delete();
                     consumer.accept(model);
                 }
             }
